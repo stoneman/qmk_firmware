@@ -63,6 +63,7 @@ doxygen/
 *.png
 *.gif
 *.jpg
+!/images/*.png
 
 # things travis sees
 secrets.tar
