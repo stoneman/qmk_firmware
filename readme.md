@@ -56,6 +56,7 @@ LEDs highlight groups of keys which perform a similar function.
 ![Layer 1](images/layer_1.png)
 
 - I have an [ultra-wide monitor](https://www.samsung.com/uk/monitors/curved-se790c/LS34E790CNSEN/) and normally position windows side by side on the Mac (left side is just under 2/3rd of the screen wide). I use [Slate](https://github.com/jigish/slate) to quickly position windows.
+     - `Shift+F17` positions the active window in the "full screen" position.
      - `Shift+F18` positions the active window in the "left two thirds" position.
      - `Shift+F19` positions the active window in the "right one third" position.
      - `Shift+F20` positions all windows in the "correct" location as specified in the slate configuration file.
