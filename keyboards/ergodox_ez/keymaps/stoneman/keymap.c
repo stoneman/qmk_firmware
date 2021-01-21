@@ -579,15 +579,18 @@ const uint8_t NO_RAW_HID_OVERRIDE = 255;
 uint8_t raw_hid_rgb_amimation_override = NO_RAW_HID_OVERRIDE;
 
 void rgb_matrix_indicators_user(void) {
-    bool is_mac = get_unicode_input_mode() == UC_MAC;
+    // bool is_mac = get_unicode_input_mode() == UC_MAC;
     switch (biton32(layer_state)) {
         case 0:
-            if (is_mac && raw_hid_rgb_amimation_override != NO_RAW_HID_OVERRIDE) {
-                rgb_matrix_mode_noeeprom(raw_hid_rgb_amimation_override);
-                return;
-            } else {
+            //
+            // TODO: Figure out why setting rgb matrix modes is not working having updated QMK
+            //
+            // if (is_mac && raw_hid_rgb_amimation_override != NO_RAW_HID_OVERRIDE) {
+            //     rgb_matrix_mode_noeeprom(raw_hid_rgb_amimation_override);
+            //     return;
+            // } else {
                 set_layer_color(0);
-            }
+            // }
             break;
         case 1:
             set_layer_color(1);
