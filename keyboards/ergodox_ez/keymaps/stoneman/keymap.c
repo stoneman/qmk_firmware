@@ -649,7 +649,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LT(4,KC_Z):
-            return 250;
+            return 175;
         default:
             return TAPPING_TERM;
     }
