@@ -45,6 +45,7 @@ enum custom_keycodes {
     EMOJI_WINK,
     EMOJI_WINKTNG,
     MACRO_CHZ,
+    MO_4,
     MUTE_DOTA_TOGGLE,
     VIM_QUIT,
     VIM_SAVE,
@@ -54,10 +55,10 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_ergodox_pretty(
     KC_ESCAPE,      LSFT(KC_1),     LSFT(KC_2),     LSFT(KC_3),     LSFT(KC_4),     LSFT(KC_5),     KC_LCBR,                                        KC_RCBR,        LSFT(KC_6),     LSFT(KC_7),     LSFT(KC_8),     KC_LBRACKET,    KC_RBRACKET,    MUTE_DOTA_TOGGLE,
-    KC_LALT_HASH,   KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,           KC_PLUS,                                        KC_NONUS_PIPE,  KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_GRAVE,
+    LCTL(KC_Z),     KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,           KC_PLUS,                                        KC_NONUS_PIPE,  KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_GRAVE,
     LT(2,KC_TAB),   KC_A,           KC_S,           KC_D,           KC_F,           KC_G,                                                                           KC_H,           KC_J,           KC_K,           KC_L,           KC_QUOTE,       LGUI_T(KC_MINUS),
-    LCTL(KC_Z),     LT(4,KC_Z),     KC_X,           KC_C,           KC_V,           KC_B,           KC_UNDS,                                        KC_EQUAL,       KC_N,           KC_M,           KC_COMMA,       KC_DOT,         KC_SLASH,       LALT_T(KC_SCOLON),
-    KC_LPRN,        KC_LALT,        LCTL(KC_SPACE), KC_LGUI,        KC_LCTRL,                                                                                                       MO(3),          KC_NONUS_TILD,  KC_HYPER_F10,   KC_NONUS_BSLASH,KC_RPRN,
+    MO_4,           KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,           KC_NONUS_TILD,                                  KC_EQUAL,       KC_N,           KC_M,           KC_COMMA,       KC_DOT,         KC_SLASH,       LALT_T(KC_SCOLON),
+    KC_LPRN,        KC_LALT,        LCTL(KC_SPACE), KC_LGUI,        KC_LCTRL,                                                                                                       MO(3),          KC_LALT_HASH,  KC_HYPER_F10,    KC_NONUS_BSLASH,KC_RPRN,
                                                                                                     MO(1),          KC_CAPSLOCK,    LALT(LGUI(LSFT(KC_LEFT))),LALT(LGUI(LSFT(KC_RIGHT))),
                                                                                                                     KC_TRANSPARENT, KC_F16,
                                                                                     KC_LSHIFT,      KC_BSPACE,      KC_DELETE,      KC_F17,         KC_ENTER,       KC_SPACE
@@ -96,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_HOME,                                        KC_PGUP,        KC_TRANSPARENT, KC_TRANSPARENT, KC_UP,          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, ALT_SHIFT_GRV,  ALT_GRV,        KC_TRANSPARENT,                                                                 LGUI(KC_LEFT),  KC_LEFT,        KC_DOWN,        KC_RIGHT,       LGUI(KC_RIGHT), KC_TRANSPARENT,
-    KC_TRANSPARENT, KC_TRANSPARENT, MACRO_CHZ,      ALT_SHIFT_TAB,  ALT_TAB,        KC_TRANSPARENT, KC_END,                                         KC_PGDOWN,      KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT, MACRO_CHZ,      KC_TRANSPARENT, ALT_SHIFT_TAB,  ALT_TAB,        KC_TRANSPARENT, KC_END,                                         KC_PGDOWN,      KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                 KC_LALT,        KC_TRANSPARENT, KC_HYPER_F14,   KC_TRANSPARENT, KC_TRANSPARENT,
                                                                                                     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
                                                                                                                     KC_TRANSPARENT, KC_TRANSPARENT,
@@ -287,6 +288,20 @@ bool process_macro_vim_chz(keyrecord_t *record) {
     return true;
 }
 
+bool process_mo_4(keyrecord_t *record) {
+    if (record->event.pressed) {
+        layer_on(4);
+    } else {
+        if (is_alt_tab_active || is_alt_grv_active) {
+            unregister_code(KC_LALT);
+            is_alt_tab_active = false;
+            is_alt_grv_active = false;
+        }
+        layer_off(4);
+    }
+    return true;
+}
+
 // modifiers
 
 bool process_win(keyrecord_t *record) {
@@ -349,17 +364,6 @@ bool process_alt_grv(keyrecord_t *record, bool withShift) {
         unregister_code(KC_GRAVE);
         if (withShift) {
             unregister_code(KC_LSFT);
-        }
-    }
-    return true;
-}
-
-bool process_magic_z(keyrecord_t *record) {
-    if (!record->event.pressed) {
-        if (is_alt_tab_active || is_alt_grv_active) {
-            unregister_code(KC_LALT);
-            is_alt_tab_active = false;
-            is_alt_grv_active = false;
         }
     }
     return true;
@@ -510,6 +514,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return process_macro_vim_sq(record);
         case MACRO_CHZ:
             return process_macro_vim_chz(record);
+        case MO_4:
+            return process_mo_4(record);
         // modifiers
         case KC_LGUI:
             return process_win(record);
@@ -542,8 +548,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return process_alt_grv(record, false);
         case ALT_SHIFT_GRV:
             return process_alt_grv(record, true);
-        case LT(4,KC_Z):
-            return process_magic_z(record);
         // emoji
         case EMOJI_ANGRY:
         case EMOJI_COOL:
@@ -650,13 +654,4 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         break;
     }
   return state;
-}
-
-uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case LT(4,KC_Z):
-            return 175;
-        default:
-            return TAPPING_TERM;
-    }
 }
