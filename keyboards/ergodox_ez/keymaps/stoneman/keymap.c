@@ -17,6 +17,10 @@
 #define KC_HYPER_F13 LALT(LCTL(LGUI(LSFT(KC_F13))))
 #define KC_HYPER_F14 LALT(LCTL(LGUI(LSFT(KC_F14))))
 #define KC_HYPER_F15 LALT(LCTL(LGUI(LSFT(KC_F15))))
+#define KC_GO_BACK LALT(LGUI(LSFT(KC_LEFT)))
+#define KC_GO_FWD LALT(LGUI(LSFT(KC_RIGHT)))
+#define KC_UNINDENT LCTL(LALT(LGUI(LSFT(KC_LEFT))))
+#define KC_INDENT LCTL(LALT(LGUI(LSFT(KC_RIGHT))))
 
 enum custom_keycodes {
     ALT_TAB = SAFE_RANGE,
@@ -59,9 +63,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LT(2,KC_TAB),   KC_A,           KC_S,           KC_D,           KC_F,           KC_G,                                                                           KC_H,           KC_J,           KC_K,           KC_L,           KC_QUOTE,       LGUI_T(KC_MINUS),
     MO_4,           KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,           KC_NONUS_TILD,                                  KC_EQUAL,       KC_N,           KC_M,           KC_COMMA,       KC_DOT,         KC_SLASH,       LALT_T(KC_SCOLON),
     KC_LPRN,        KC_LALT,        LCTL(KC_SPACE), KC_LGUI,        KC_LCTRL,                                                                                                       MO(3),          KC_LALT_HASH,  KC_HYPER_F10,    KC_NONUS_BSLASH,KC_RPRN,
-                                                                                                    MO(1),          KC_CAPSLOCK,    LALT(LGUI(LSFT(KC_LEFT))),LALT(LGUI(LSFT(KC_RIGHT))),
-                                                                                                                    KC_TRANSPARENT, KC_F16,
-                                                                                    KC_LSHIFT,      KC_BSPACE,      KC_DELETE,      KC_F17,         KC_ENTER,       KC_SPACE
+                                                                                                    MO(1),          KC_CAPSLOCK,    KC_LEFT,        KC_RIGHT,
+                                                                                                                    KC_TRANSPARENT, KC_UP,
+                                                                                    KC_LSHIFT,      KC_BSPACE,      KC_DELETE,      KC_DOWN,        KC_ENTER,       KC_SPACE
   ),
   [1] = LAYOUT_ergodox_pretty(
     RESET,          KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,          LALT(KC_PSCREEN),                               KC_TRANSPARENT, KC_F6,          KC_F7,          KC_F8,          KC_F9,          KC_F10,         KC_F11,
@@ -76,12 +80,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [2] = LAYOUT_ergodox_pretty(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, EMOJI_SHRUG,    EMOJI_THINKING, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, EMOJI_HEARTS,   EMOJI_TADA,     EMOJI_WAVE,     EMOJI_COOL,     EMOJI_FINGERS_X,                                KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_TRANSPARENT, KC_TRANSPARENT, EMOJI_ROFL,     EMOJI_JOY,      EMOJI_LAUGH,    EMOJI_WINK,                                                                     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_EMOJI,
+    KC_TRANSPARENT, KC_TRANSPARENT, EMOJI_ROFL,     EMOJI_JOY,      EMOJI_LAUGH,    EMOJI_WINK,                                                                     KC_TRANSPARENT, KC_UNINDENT,    KC_TRANSPARENT, KC_INDENT,      KC_TRANSPARENT, KC_EMOJI,
     KC_TRANSPARENT, KC_TRANSPARENT, EMOJI_SHOCK,    EMOJI_ANGRY,    EMOJI_SAD,      EMOJI_WINKTNG,  EMOJI_EYES,                                     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, EMOJI_MINDBLO,  EMOJI_SEENOEVIL,                                                                                                KC_TRANSPARENT, KC_TRANSPARENT, KC_HYPER_F12,   KC_TRANSPARENT, KC_TRANSPARENT,
-                                                                                                    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-                                                                                                                    KC_TRANSPARENT, KC_TRANSPARENT,
-                                                                                    EMOJI_THUMBS_UP,EMOJI_SMILE,    EMOJI_GRIN,     KC_TRANSPARENT, LALT(KC_ENTER), KC_TRANSPARENT
+                                                                                                    KC_TRANSPARENT, KC_TRANSPARENT, KC_GO_BACK,     KC_GO_FWD,
+                                                                                                                    KC_TRANSPARENT, KC_F16,
+                                                                                    EMOJI_THUMBS_UP,EMOJI_SMILE,    EMOJI_GRIN,     KC_F17,         KC_TRANSPARENT, KC_TRANSPARENT
   ),
   [3] = LAYOUT_ergodox_pretty(
     KC_TRANSPARENT, KC_1,           KC_2,           KC_3,           KC_4,           KC_5,           KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_6,           KC_7,           KC_8,           KC_9,           KC_0,           KC_TRANSPARENT,
@@ -96,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [4] = LAYOUT_ergodox_pretty(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_HOME,                                        KC_PGUP,        KC_TRANSPARENT, KC_TRANSPARENT, KC_UP,          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, ALT_SHIFT_GRV,  ALT_GRV,        KC_TRANSPARENT,                                                                 LGUI(KC_LEFT),  KC_LEFT,        KC_DOWN,        KC_RIGHT,       LGUI(KC_RIGHT), KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, ALT_SHIFT_GRV,  ALT_GRV,        KC_TRANSPARENT,                                                                 KC_TRANSPARENT, KC_LEFT,        KC_DOWN,        KC_RIGHT,       KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, MACRO_CHZ,      KC_TRANSPARENT, ALT_SHIFT_TAB,  ALT_TAB,        KC_TRANSPARENT, KC_END,                                         KC_PGDOWN,      KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                 KC_LALT,        KC_TRANSPARENT, KC_HYPER_F14,   KC_TRANSPARENT, KC_TRANSPARENT,
                                                                                                     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,

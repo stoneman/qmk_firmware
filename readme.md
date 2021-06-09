@@ -28,6 +28,8 @@ The source for my layout can be found within: [keyboards/ergodox_ez/keymaps/ston
           - `left_command` to `left_control`
           - `left_control` to `left_command`
   - [`Raw HID`](https://docs.qmk.fm/#/feature_rawhid) is used by my [Mac Daemon](https://github.com/stoneman/micmon) to set RGB key animation when [Zoom](https://zoom.us/) is running to remind me to position/switch on my mic.
+  - [AutoHotkey](https://www.autohotkey.com/) on Windows converts `Alt+Left` and `Alt+Right` to `Ctrl+Left` and `Ctrl+Right` for moving the cursor back/forward one word, which matches the Mac behaviour.
+  - AutoHotkey on Windows converts `Ctrl+Left` and `Ctrl+Right` to `Home` and `End` for moving the cursor to the start/end of the line, which matches the Mac behaviour.
       
 ### Layer 0 - Main
 
@@ -40,12 +42,10 @@ Key LEDs are a light purple in the center of the key pads fading out to a cool b
  - `Alt+F6` is `Mute Mic` for Zoom on the Mac and [Discord](https://discordapp.com/) on the PC.
  - When holding `; / Left Alt`, `Alt+F6` becomes the `Layer 5` key.
  - The top row numbers are "shifted" by default, except for the keys in position `9` and `0` which are `[` and `]`. When `Shift` is held, the top row numbers revert to their digit values.
- - The `ALT↯TAB` and `ALT↯+TAB` keys are used for switching windows, natively on Windows and using [Alt-Tab](https://github.com/lwouis/alt-tab-macos) on the Mac.
- - Alt-Tab on the Mac also uses the `ALT↯GRV` and `ALT↯+GRV` keys to cycle through windows of the currently focused window.
  - The `Caps Lock` key delays it's release by 200ms. This is because MacOS assumes you were only joking if you tap it too quickly (seriously 🤦‍)
  - `Ctrl+Z` - Undo, it's so nice having a key for this.
- - The `Enter` key on this left hand cluster is handy when my right hand is on the mouse.
  - `Ctrl+Space` is the Mac Spotlight hotkey.
+ - `Hyper F10` - is the hotkey assigned to [Doxaid](https://github.com/stoneman/doxaid) which displays a layout map for the currently active layout.
  
 ### Layer 1 - Func
 
@@ -69,10 +69,9 @@ Emoji and more keys that I occasionally want when Layer 0 is active.
 
 LEDs highlight groups of keys which perform a similar function.
 
-![Layer 2](images/layer_2.png)
+![Layer 2](images/layer_2.png)🙈
 
  - `Ctrl+Cmd+Space` is the MacOS emoji hotkey. AutoHotkey on the PC maps it to the Windows emoji hotkey (`Win+.`).
- - `Alt+Enter` saves stretching for the `Alt` and `Enter` keys with Layer 0.
  - For the Unicode input to work on both Windows and Mac, I have:
     - [WinCompose](https://github.com/samhocevar/wincompose) running on Windows.
     - The `Unicode Hex Input` keyboard layout enabled on the Mac.
@@ -80,10 +79,14 @@ LEDs highlight groups of keys which perform a similar function.
     - Code which sets the Unicode format to Mac-style whenever a Raw HID command is received.
     - Code which sends the Mac "switch to next input type" shortcut whenever the Emoji layer is enabled or disabled. Since I have only two input types, the effect is that `Unicode Hex Input` is enabled for the Emoji layer and `British - PC` is enabled for all others. 
     - Code which uses QMK's Unicode input method for Windows when Windows-style Unicode is set and which sends the relevant hex strings when Mac-style Unicode is set (I couldn't get QMK's Unicode input method for Mac to work with Unicode characters in the emoji range).
+ - Nothing to do with emoji, but the following have also been added to this layer:
+    - `"go back"` and `"go forward"` are `Go -> Back` and `Go -> Forward` in VSCode.
+    - `"Q-opn Prev"` and `"Q-opn Next"` navigate back/forward through the previously opened files in VSCode.
+    - `"un-indent"` nad `indent"` unindent/indent the current/selected line(s) in VSCode.
 
 ### Layer 3 - Num
  
-Number, volume and arrow keys.
+Number & volume keys.
 
 LEDs highlight groups of keys which perform a similar function.
 
@@ -97,8 +100,9 @@ LEDs highlight groups of keys which perform a similar function.
 
 ![Layer 4](images/layer_4.png)
 
-  - The `Alt+Left` and `Alt+Right` keys are for moving the cursor back/forward one word on the Mac. [AutoHotkey](https://www.autohotkey.com/) converts to `Ctrl+Left` and `Ctrl+Right` for the same behaviour on Windows.
-  - The `Ctrl+Left` and `Ctrl+Right` keys are for moving the cursor to the start/end of the line on the Mac. AutoHotkey converts to `Home` and `End` for the same behaviour on Windows.
+  - The `ALT↯TAB` and `ALT↯+TAB` keys are used for switching windows, natively on Windows and using [Alt-Tab](https://github.com/lwouis/alt-tab-macos) on the Mac.
+  - Alt-Tab on the Mac also uses the `ALT↯GRV` and `ALT↯+GRV` keys to cycle through windows of the currently focused window.
+  - There are also arrow keys and a handily positioned `Alt` key on this layer.
   
 ### Layer 3 - Dota
 
