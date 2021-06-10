@@ -102,7 +102,7 @@ LEDs highlight groups of keys which perform a similar function.
 
   - The `ALT↯TAB` and `ALT↯+TAB` keys are used for switching windows, natively on Windows and using [Alt-Tab](https://github.com/lwouis/alt-tab-macos) on the Mac.
   - Alt-Tab on the Mac also uses the `ALT↯GRV` and `ALT↯+GRV` keys to cycle through windows of the currently focused window.
-  - There are also arrow keys and a handily positioned `Alt` key on this layer.
+  - There are also arrow keys on this layer, including `Alt`/`Ctrl` modified `Left`/`Right` keys, and `Alt`-modified `Backspace` and `Delete` keys.
   
 ### Layer 3 - Dota
 
